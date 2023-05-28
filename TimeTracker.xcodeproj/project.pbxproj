@@ -13,6 +13,7 @@
 		F365B4A82A222E40001F45E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F365B4A62A222E40001F45E5 /* Main.storyboard */; };
 		F365B4AA2A222E41001F45E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F365B4A92A222E41001F45E5 /* Assets.xcassets */; };
 		F365B4AD2A222E41001F45E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F365B4AB2A222E41001F45E5 /* LaunchScreen.storyboard */; };
+		F365B4B92A222F88001F45E5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F365B4B82A222F88001F45E5 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F365B4B92A222F88001F45E5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = TimeTracker;
+			packageProductDependencies = (
+				F365B4B82A222F88001F45E5 /* SnapKit */,
+			);
 			productName = TimeTracker;
 			productReference = F365B49D2A222E40001F45E5 /* TimeTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = F365B4942A222E40001F45E5;
+			packageReferences = (
+				F365B4B72A222F88001F45E5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F365B49E2A222E40001F45E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -358,6 +366,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F365B4B72A222F88001F45E5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F365B4B82A222F88001F45E5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F365B4B72A222F88001F45E5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F365B4952A222E40001F45E5 /* Project object */;
 }
