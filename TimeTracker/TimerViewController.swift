@@ -29,10 +29,11 @@ class TimerViewController: UIViewController {
     }()
     
     private lazy var startStopButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "play"), for: .normal)
-        button.setTitle("Press", for: .normal)
-        button.tintColor = UIColor.green
+        let button = UIButton(type: .system)
+        button.setTitle("Start", for: .normal)
+        button.tintColor = UIColor.white
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 15
         return button
     }()
 
@@ -73,12 +74,14 @@ extension TimerViewController {
         
         startStopButton.snp.makeConstraints {
             $0.centerX.equalTo(view)
-            $0.bottom.equalTo(60)
+            $0.bottom.equalTo(-80)
+            $0.width.equalTo(300)
+            $0.height.equalTo(60)
         }
     }
     
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray3
     }
 }
 
