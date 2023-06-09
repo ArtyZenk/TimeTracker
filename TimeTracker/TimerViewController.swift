@@ -28,7 +28,7 @@ class TimerViewController: UIViewController {
     
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
+        label.text = "10"
         label.font = UIFont.boldSystemFont(ofSize: 75)
         label.textColor = .black
         return label
@@ -40,7 +40,6 @@ class TimerViewController: UIViewController {
         button.tintColor = .white
         button.backgroundColor = .black
         button.layer.cornerRadius = 15
-        button.addTarget(self, action: #selector(startStopButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -48,6 +47,8 @@ class TimerViewController: UIViewController {
     
     private var durationTimer = 10
 
+    private let shapeLayer = CAShapeLayer()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,17 +60,49 @@ class TimerViewController: UIViewController {
         setupLayout()
     }
     
-    @objc func startStopButtonPressed() {
+    override func viewDidLayoutSubviews() {
+        setCircularAnimation()
+    }
+    
+    @objc private func startStopButtonPressed() {
         timer = Timer.scheduledTimer(timeInterval: 1,
                                      target: self,
-                                     selector: #selector(timerAction),
+                                     selector: #selector(setTimer),
                                      userInfo: nil,
                                      repeats: true)
     }
     
-    @objc func timerAction() {
+    // MARK: - Timer methods
+    @objc private func setTimer() {
         durationTimer -= 1
         timerLabel.text = "\(durationTimer)"
+        
+        if durationTimer == 0 {
+            timer.invalidate()
+        }
+    }
+    
+    // MARK: - Animation
+    
+    private func setCircularAnimation() {
+        
+        let center = CGPoint(x: shapeView.frame.width / 2, y: shapeView.frame.height / 2)
+        let endAngle = -CGFloat.pi / 2
+        let startAngle = 2 * CGFloat.pi + endAngle
+        
+        let circularPath = UIBezierPath(arcCenter: center,
+                                        radius: 138,
+                                        startAngle: startAngle,
+                                        endAngle: endAngle,
+                                        clockwise: false)
+        
+        shapeLayer.path = circularPath.cgPath
+        shapeLayer.lineWidth = 21
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeEnd = 1
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeView.layer.addSublayer(shapeLayer)
     }
 }
 
@@ -82,6 +115,8 @@ extension TimerViewController {
         
         shapeView.addSubview(timerLabel)
         
+        startStopButton.addTarget(self, action: #selector(startStopButtonPressed), for: .touchUpInside)
+
         view.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
