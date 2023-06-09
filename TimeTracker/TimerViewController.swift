@@ -20,10 +20,16 @@ class TimerViewController: UIViewController {
         return label
     }()
     
+    private lazy var shapeView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "circle")
+        return image
+    }()
+    
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
-        label.font = UIFont.boldSystemFont(ofSize: 84)
+        label.font = UIFont.boldSystemFont(ofSize: 75)
         label.textColor = .black
         return label
     }()
@@ -31,11 +37,16 @@ class TimerViewController: UIViewController {
     private lazy var startStopButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Start", for: .normal)
-        button.tintColor = UIColor.white
+        button.tintColor = .white
         button.backgroundColor = .black
         button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(startStopButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    private var timer = Timer()
+    
+    private var durationTimer = 10
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,14 +58,29 @@ class TimerViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         setupLayout()
     }
+    
+    @objc func startStopButtonPressed() {
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(timerAction),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    @objc func timerAction() {
+        durationTimer -= 1
+        timerLabel.text = "\(durationTimer)"
+    }
 }
 
 // MARK: - Private methods
 extension TimerViewController {
     private func setupHierarch() {
         view.addSubview(mainLabel)
-        view.addSubview(timerLabel)
+        view.addSubview(shapeView)
         view.addSubview(startStopButton)
+        
+        shapeView.addSubview(timerLabel)
         
         view.subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -67,9 +93,16 @@ extension TimerViewController {
             $0.top.equalTo(80)
         }
         
-        timerLabel.snp.makeConstraints {
+        shapeView.snp.makeConstraints {
             $0.centerY.equalTo(view)
             $0.centerX.equalTo(view)
+            $0.width.equalTo(300)
+            $0.height.equalTo(300)
+        }
+        
+        timerLabel.snp.makeConstraints {
+            $0.centerY.equalTo(shapeView)
+            $0.centerX.equalTo(shapeView)
         }
         
         startStopButton.snp.makeConstraints {
@@ -81,7 +114,7 @@ extension TimerViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .white
     }
 }
 
