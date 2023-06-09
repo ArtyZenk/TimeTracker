@@ -7,20 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F343A4252A27AF9800A1186E /* CircularProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F343A4242A27AF9800A1186E /* CircularProgressBarView.swift */; };
 		F365B4A12A222E40001F45E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F365B4A02A222E40001F45E5 /* AppDelegate.swift */; };
 		F365B4A32A222E40001F45E5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F365B4A22A222E40001F45E5 /* SceneDelegate.swift */; };
-		F365B4A52A222E40001F45E5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F365B4A42A222E40001F45E5 /* ViewController.swift */; };
+		F365B4A52A222E40001F45E5 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F365B4A42A222E40001F45E5 /* TimerViewController.swift */; };
 		F365B4AA2A222E41001F45E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F365B4A92A222E41001F45E5 /* Assets.xcassets */; };
 		F365B4B92A222F88001F45E5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F365B4B82A222F88001F45E5 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F343A4242A27AF9800A1186E /* CircularProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBarView.swift; sourceTree = "<group>"; };
 		F365B49D2A222E40001F45E5 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F365B4A02A222E40001F45E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F365B4A22A222E40001F45E5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F365B4A42A222E40001F45E5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F365B4A42A222E40001F45E5 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		F365B4A92A222E41001F45E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F365B4AE2A222E41001F45E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,8 +56,7 @@
 			children = (
 				F365B4A02A222E40001F45E5 /* AppDelegate.swift */,
 				F365B4A22A222E40001F45E5 /* SceneDelegate.swift */,
-				F365B4A42A222E40001F45E5 /* ViewController.swift */,
-				F343A4242A27AF9800A1186E /* CircularProgressBarView.swift */,
+				F365B4A42A222E40001F45E5 /* TimerViewController.swift */,
 				F365B4A92A222E41001F45E5 /* Assets.xcassets */,
 				F365B4AE2A222E41001F45E5 /* Info.plist */,
 			);
@@ -141,9 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F365B4A52A222E40001F45E5 /* ViewController.swift in Sources */,
+				F365B4A52A222E40001F45E5 /* TimerViewController.swift in Sources */,
 				F365B4A12A222E40001F45E5 /* AppDelegate.swift in Sources */,
-				F343A4252A27AF9800A1186E /* CircularProgressBarView.swift in Sources */,
 				F365B4A32A222E40001F45E5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
