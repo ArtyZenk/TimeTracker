@@ -19,16 +19,10 @@ class TimerViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
-    private lazy var shapeView: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "circle")
-        return image
-    }()
-    
+        
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "10"
+        label.text = "\(durationTimer)"
         label.font = UIFont.boldSystemFont(ofSize: 75)
         label.textColor = .black
         return label
@@ -65,11 +59,14 @@ class TimerViewController: UIViewController {
     }
     
     @objc private func startStopButtonPressed() {
+    
+        
         timer = Timer.scheduledTimer(timeInterval: 1,
                                      target: self,
                                      selector: #selector(setTimer),
                                      userInfo: nil,
                                      repeats: true)
+        setBasicAnimation()
     }
     
     // MARK: - Timer methods
@@ -83,10 +80,9 @@ class TimerViewController: UIViewController {
     }
     
     // MARK: - Animation
-    
     private func setCircularAnimation() {
         
-        let center = CGPoint(x: shapeView.frame.width / 2, y: shapeView.frame.height / 2)
+        let center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         let endAngle = -CGFloat.pi / 2
         let startAngle = 2 * CGFloat.pi + endAngle
         
@@ -102,7 +98,20 @@ class TimerViewController: UIViewController {
         shapeLayer.strokeEnd = 1
         shapeLayer.lineCap = CAShapeLayerLineCap.round
         shapeLayer.strokeColor = UIColor.red.cgColor
-        shapeView.layer.addSublayer(shapeLayer)
+        view.layer.addSublayer(shapeLayer)
+    }
+    
+    private func setBasicAnimation() {
+        
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        
+        basicAnimation.toValue = 0
+        basicAnimation.duration = CFTimeInterval(durationTimer)
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
+        basicAnimation.isRemovedOnCompletion = true
+        
+        shapeLayer.add(basicAnimation, forKey: "basicAnimation")
+        
     }
 }
 
@@ -110,10 +119,8 @@ class TimerViewController: UIViewController {
 extension TimerViewController {
     private func setupHierarch() {
         view.addSubview(mainLabel)
-        view.addSubview(shapeView)
+        view.addSubview(timerLabel)
         view.addSubview(startStopButton)
-        
-        shapeView.addSubview(timerLabel)
         
         startStopButton.addTarget(self, action: #selector(startStopButtonPressed), for: .touchUpInside)
 
@@ -128,16 +135,9 @@ extension TimerViewController {
             $0.top.equalTo(80)
         }
         
-        shapeView.snp.makeConstraints {
+        timerLabel.snp.makeConstraints {
             $0.centerY.equalTo(view)
             $0.centerX.equalTo(view)
-            $0.width.equalTo(300)
-            $0.height.equalTo(300)
-        }
-        
-        timerLabel.snp.makeConstraints {
-            $0.centerY.equalTo(shapeView)
-            $0.centerX.equalTo(shapeView)
         }
         
         startStopButton.snp.makeConstraints {
