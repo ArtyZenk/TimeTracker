@@ -22,7 +22,7 @@ class TimerViewController: UIViewController {
         
     private lazy var timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(durationTimer)"
+        label.text = "\(durationWorkTimer)"
         label.font = UIFont.boldSystemFont(ofSize: 75)
         label.textColor = .black
         return label
@@ -37,10 +37,24 @@ class TimerViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Timer properties
     private var timer = Timer()
     
-    private var durationTimer = 10
-
+    private let workTime = 10
+    private let relaxTime = 5
+    
+    private var durationWorkTimer = 10
+    private var durationRelaxTimer = 5
+    
+    private var isStarted = false
+   
+    private enum WorkingMode {
+        case isWorkingMode, isRelaxMode
+    }
+    
+    private var currentMode = WorkingMode.isWorkingMode
+    
+    // MARK: - CAShapeLayer properties
     private let shapeLayer = CAShapeLayer()
     
     // MARK: - Lifecycle
@@ -48,39 +62,76 @@ class TimerViewController: UIViewController {
         super.viewDidLoad()
         setupHierarch()
         setupView()
+        setCircularAnimation(color: UIColor.black.cgColor)
     }
 
     override func viewWillLayoutSubviews() {
         setupLayout()
     }
-    
-    override func viewDidLayoutSubviews() {
-        setCircularAnimation()
-    }
-    
+
     @objc private func startStopButtonPressed() {
-    
+        isStarted.toggle()
         
-        timer = Timer.scheduledTimer(timeInterval: 1,
-                                     target: self,
-                                     selector: #selector(setTimer),
-                                     userInfo: nil,
-                                     repeats: true)
-        setBasicAnimation()
+        switch currentMode {
+        case .isWorkingMode:
+            startStopButton.setTitle("Relax", for: .normal)
+            
+            timerLabel.text = "\(durationWorkTimer)"
+            
+            setCircularAnimation(color: UIColor.red.cgColor)
+
+            timer = Timer.scheduledTimer(timeInterval: 1,
+                                         target: self,
+                                         selector: #selector(setTimerForWork),
+                                         userInfo: nil,
+                                         repeats: true)
+            
+            setBasicAnimation(with: durationWorkTimer)
+            
+            durationRelaxTimer = relaxTime
+            currentMode = .isRelaxMode
+            
+        case .isRelaxMode:
+            startStopButton.setTitle("Work", for: .normal)
+            
+            timerLabel.text = "\(durationRelaxTimer)"
+            
+            setCircularAnimation(color: UIColor.green.cgColor)
+
+            timer = Timer.scheduledTimer(timeInterval: 1,
+                                         target: self,
+                                         selector: #selector(setTimerForRelax),
+                                         userInfo: nil,
+                                         repeats: true)
+            
+            setBasicAnimation(with: durationRelaxTimer)
+            
+            durationWorkTimer = workTime
+            currentMode = .isWorkingMode
+        }
     }
     
     // MARK: - Timer methods
-    @objc private func setTimer() {
-        durationTimer -= 1
-        timerLabel.text = "\(durationTimer)"
+    @objc private func setTimerForWork() {
+        durationWorkTimer -= 1
+        timerLabel.text = "\(durationWorkTimer)"
         
-        if durationTimer == 0 {
+        if durationWorkTimer == 0 {
+            timer.invalidate()
+        }
+    }
+    
+    @objc private func setTimerForRelax() {
+        durationRelaxTimer -= 1
+        timerLabel.text = "\(durationRelaxTimer)"
+        
+        if durationRelaxTimer == 0 {
             timer.invalidate()
         }
     }
     
     // MARK: - Animation
-    private func setCircularAnimation() {
+    private func setCircularAnimation(color: CGColor?) {
         
         let center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         let endAngle = -CGFloat.pi / 2
@@ -97,16 +148,18 @@ class TimerViewController: UIViewController {
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeEnd = 1
         shapeLayer.lineCap = CAShapeLayerLineCap.round
-        shapeLayer.strokeColor = UIColor.red.cgColor
+        
+        shapeLayer.strokeColor = color
+        
         view.layer.addSublayer(shapeLayer)
     }
     
-    private func setBasicAnimation() {
+    private func setBasicAnimation(with time: Int) {
         
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         
         basicAnimation.toValue = 0
-        basicAnimation.duration = CFTimeInterval(durationTimer)
+        basicAnimation.duration = CFTimeInterval(time)
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = true
         
