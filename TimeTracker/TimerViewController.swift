@@ -74,7 +74,6 @@ class TimerViewController: UIViewController {
         if isStarted && (durationWorkTimer != 0 || durationRelaxTimer != 0) {
             timer.invalidate()
             isStarted.toggle()
-//            durationWorkTimer = durationWorkTimer - (workTime - durationWorkTimer)
             return
         }
         
@@ -92,15 +91,14 @@ class TimerViewController: UIViewController {
                                          repeats: true)
             
             isStarted.toggle()
+            
             setBasicAnimation(with: durationWorkTimer)
             
-            
-            currentMode = .isRelaxMode
+//            currentMode = .isRelaxMode
         case .isRelaxMode:
             startStopButton.setTitle("Work", for: .normal)
             timerLabel.text = "\(durationRelaxTimer)"
 
-            
             setCircularAnimation(color: UIColor.green.cgColor)
             
             timer = Timer.scheduledTimer(timeInterval: 1,
@@ -114,8 +112,6 @@ class TimerViewController: UIViewController {
             
             currentMode = .isWorkingMode
         }
-        
-       
     }
     
     // MARK: - Timer methods
@@ -123,11 +119,9 @@ class TimerViewController: UIViewController {
         durationWorkTimer -= 1
         timerLabel.text = "\(durationWorkTimer)"
 
-
-        
         if durationWorkTimer == 0 {
             timer.invalidate()
-            durationWorkTimer = 10
+//            durationWorkTimer = 10
             timerLabel.text = "\(durationWorkTimer)"
         }
     }
@@ -136,10 +130,11 @@ class TimerViewController: UIViewController {
         durationRelaxTimer -= 1
         timerLabel.text = "\(durationRelaxTimer)"
     
-        
         if durationRelaxTimer == 0 {
             timer.invalidate()
             durationRelaxTimer = 5
+            timerLabel.text = "\(durationRelaxTimer)"
+
         }
     }
     
@@ -158,11 +153,12 @@ class TimerViewController: UIViewController {
         
 
         shapeLayer.path = circularPath.cgPath
-        shapeLayer.lineWidth = 21
+        shapeLayer.lineWidth = 20
         shapeLayer.fillColor = UIColor.clear.cgColor
-        
         shapeLayer.strokeEnd = 1
         shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.opacity = 0.7
+//        shapeLayer.strokeEnd = 0.7
         shapeLayer.strokeColor = color
         
         view.layer.addSublayer(shapeLayer)
@@ -174,6 +170,7 @@ class TimerViewController: UIViewController {
         
         basicAnimation.duration = CFTimeInterval(time)
         basicAnimation.toValue = 0
+//        basicAnimation.fromValue = 0.2
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = true
         
