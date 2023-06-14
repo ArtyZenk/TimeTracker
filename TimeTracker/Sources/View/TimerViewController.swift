@@ -75,7 +75,7 @@ class TimerViewController: UIViewController {
         let currentWorkPosition = Double(durationWorkTimer * 100) / Double(workTime) / 100
         let currentRelaxPosition = Double(durationRelaxTimer * 100) / Double(relaxTime) / 100
 
-        if isStarted && (durationWorkTimer != 0 && durationRelaxTimer != 0) {
+        if isStarted && (durationWorkTimer != 0 || durationRelaxTimer != 0) {
             isStarted.toggle()
             
             timer.invalidate()
@@ -133,7 +133,7 @@ class TimerViewController: UIViewController {
             startStopButton.setTitle("Relax", for: .normal)
             currentMode = .isRelaxMode
 
-            durationRelaxTimer = 5
+            durationRelaxTimer = relaxTime
             timerLabel.text = "\(durationWorkTimer)"
         }
     }
@@ -150,12 +150,14 @@ class TimerViewController: UIViewController {
             startStopButton.setTitle("Work", for: .normal)
             currentMode = .isWorkingMode
 
-            durationWorkTimer = 10
+            durationWorkTimer = workTime
             timerLabel.text = "\(durationRelaxTimer)"
         }
     }
-    
-    // MARK: - Animation
+}
+
+// MARK: - Animation
+extension TimerViewController {
     private func setCircularAnimation(color: CGColor?, position: CGFloat) {
         
         let center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
