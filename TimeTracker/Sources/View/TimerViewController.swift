@@ -87,7 +87,6 @@ class TimerViewController: UIViewController {
             }
             
             shapeLayer.removeAllAnimations()
-            
             return
         }
         
@@ -134,9 +133,8 @@ class TimerViewController: UIViewController {
             startStopButton.setTitle("Relax", for: .normal)
             currentMode = .isRelaxMode
 
-//            durationRelaxTimer = 5
+            durationRelaxTimer = 5
             timerLabel.text = "\(durationWorkTimer)"
-
         }
     }
     
@@ -152,9 +150,8 @@ class TimerViewController: UIViewController {
             startStopButton.setTitle("Work", for: .normal)
             currentMode = .isWorkingMode
 
-//            durationWorkTimer = 10
+            durationWorkTimer = 10
             timerLabel.text = "\(durationRelaxTimer)"
-
         }
     }
     

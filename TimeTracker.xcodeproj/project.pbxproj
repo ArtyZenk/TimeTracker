@@ -35,6 +35,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F300306F2A39B3510015941B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F365B4A02A222E40001F45E5 /* AppDelegate.swift */,
+				F365B4A22A222E40001F45E5 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F30030702A39B3910015941B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F365B4A42A222E40001F45E5 /* TimerViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F30030712A39B3AA0015941B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F365B4A92A222E41001F45E5 /* Assets.xcassets */,
+				F30030722A39B3C50015941B /* Configuration */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F30030722A39B3C50015941B /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F365B4AE2A222E41001F45E5 /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F30030732A39B3D70015941B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F300306F2A39B3510015941B /* App */,
+				F30030702A39B3910015941B /* View */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		F365B4942A222E40001F45E5 = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +97,8 @@
 		F365B49F2A222E40001F45E5 /* TimeTracker */ = {
 			isa = PBXGroup;
 			children = (
-				F365B4A02A222E40001F45E5 /* AppDelegate.swift */,
-				F365B4A22A222E40001F45E5 /* SceneDelegate.swift */,
-				F365B4A42A222E40001F45E5 /* TimerViewController.swift */,
-				F365B4A92A222E41001F45E5 /* Assets.xcassets */,
-				F365B4AE2A222E41001F45E5 /* Info.plist */,
+				F30030732A39B3D70015941B /* Sources */,
+				F30030712A39B3AA0015941B /* Resources */,
 			);
 			path = TimeTracker;
 			sourceTree = "<group>";
@@ -270,7 +310,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9DSLGCL4J8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TimeTracker/Info.plist;
+				INFOPLIST_FILE = TimeTracker/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -296,7 +336,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9DSLGCL4J8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TimeTracker/Info.plist;
+				INFOPLIST_FILE = TimeTracker/Resources/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
